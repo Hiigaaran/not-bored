@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@android:drawable/ic_menu_revert"
         app:title="@string/activities_fragment_title"
+        app:titleMarginStart="80dp"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
         app:titleTextColor="#000000" />
 

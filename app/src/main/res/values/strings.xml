@@ -22,5 +22,6 @@ vestibulum cum leo semper fusce porta eu fermentum. Proin nisi suspendisse class
     <string name="activities_fragment_item_relaxation">Relaxation</string>
     <string name="activities_fragment_item_music">Music</string>
     <string name="activities_fragment_item_busywork">Busywork</string>
-    <string name="activities_frabment_btn_try">Try Another</string>
+    <string name="activities_fragment_btn_try">Try Another</string>
+    <string name="activities_fragment_price">Price</string>
 </resources>
