@@ -1,12 +1,12 @@
-package cl.accenture.integrador_not_bored.view
+package cl.accenture.integrador_not_bored.view.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import cl.accenture.integrador_not_bored.R
 
-class TosActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tos)
+        setContentView(R.layout.activity_main)
     }
 }

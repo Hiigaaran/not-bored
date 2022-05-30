@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3200BCD4"
-    tools:context=".view.TosActivity">
+    tools:context=".view.tos.TosActivity">
 
     <TextView
         android:id="@+id/textView"
