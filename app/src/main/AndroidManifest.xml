@@ -14,17 +14,22 @@
         android:theme="@style/Theme.Integradornotbored"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityDetail"
+            android:name=".view.activitydetail.ActivityDetail"
             android:exported="false" />
         <activity
-            android:name=".ActivityListActivity"
+            android:name=".view.activitylist.ActivityListActivity"
             android:exported="false" />
         <activity
-            android:name=".TosActivity"
+            android:name=".view.tos.TosActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".view.splash.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
