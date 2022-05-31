@@ -18,6 +18,9 @@ class ActivityListActivity : AppCompatActivity() {
         val activityItemRepository = ActivityItemRepository(ActivityItemDatasource())
 
         binding.activityList.layoutManager = LinearLayoutManager(this)
+        binding.activityList.adapter = activityListAdapter
         activityListAdapter.setActivitiesItems(activityItemRepository.getActivities())
+
+
     }
 }
