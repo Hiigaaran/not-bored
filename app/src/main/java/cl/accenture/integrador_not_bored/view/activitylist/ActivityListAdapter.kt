@@ -1,9 +1,13 @@
 package cl.accenture.integrador_not_bored.view.activitylist
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.databinding.ActivityItemBinding
+import cl.accenture.integrador_not_bored.view.activitydetail.ActivityDetail
 
 class ActivityListAdapter: RecyclerView.Adapter<ActivityListAdapter.ActivityViewHolder>() {
 
@@ -31,6 +35,15 @@ class ActivityListAdapter: RecyclerView.Adapter<ActivityListAdapter.ActivityView
     class ActivityViewHolder(private val binding: ActivityItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(activity: ActivityItem) {
             this.binding.activityTitle.text = activity.activityName
+            this.binding.button.setOnClickListener {
+                val intent = Intent(it.context, ActivityDetail::class.java).apply {
+                    var participants: String? = "0"
+                    this.extras?.run { participants = getString(R.string.main_activity_lbl_participants.toString()) }
+                    putExtra("activityParticipants", participants)
+                    putExtra("activityTitle", binding.activityTitle.text)
+                }
+                ContextCompat.startActivity(it.context, intent, null)
+            }
         }
     }
 }
