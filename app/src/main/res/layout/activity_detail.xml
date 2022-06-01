@@ -104,7 +104,9 @@
         android:text="TextView"
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tryAgainBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.035"
         tools:layout_editor_absoluteX="34dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

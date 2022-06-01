@@ -3,6 +3,8 @@ package cl.accenture.integrador_not_bored.view.splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.databinding.ActivityMainBinding
 import cl.accenture.integrador_not_bored.view.activitylist.ActivityListActivity
@@ -15,12 +17,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.mainBtnStart.isEnabled = false
+
         binding.tosTxtLink.setOnClickListener {
             onTOSLinkClicked()
         }
 
         binding.mainBtnStart.setOnClickListener {
             onStartBtnClicked()
+        }
+
+        binding.editMainTxtNumber.addTextChangedListener {
+            onParticipantsNumberChanged()
         }
     }
 
@@ -34,5 +42,13 @@ class MainActivity : AppCompatActivity() {
             putExtra("participants", binding.editMainTxtNumber.text)
         }
         startActivity(intent)
+    }
+
+    fun onParticipantsNumberChanged() {
+        when {
+            !binding.editMainTxtNumber.text.isNullOrBlank() && binding.editMainTxtNumber.text.toString().toInt() <= 0 -> Toast.makeText(this, "Participants must be 1 or above", Toast.LENGTH_SHORT).show()
+            !binding.editMainTxtNumber.text.isNullOrBlank() -> binding.mainBtnStart.isEnabled = true
+            binding.editMainTxtNumber.text.isNullOrBlank() -> binding.mainBtnStart.isEnabled = false
+        }
     }
 }

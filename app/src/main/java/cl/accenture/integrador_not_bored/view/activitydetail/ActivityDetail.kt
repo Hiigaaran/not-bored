@@ -30,5 +30,13 @@ class ActivityDetail : AppCompatActivity() {
             //Se guardan los resultados de la llamada para generar la proxima actividad.
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
         }
+        startActivity(intentTryAnother)
+    }
+
+    fun onBackBtnClick() {
+        val intentReturn = Intent(this, ActivityListActivity::class.java).apply {
+            putExtra("participants", intent.extras?.getString("activityParticipants") ?: "0")
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
     }
 }
