@@ -9,9 +9,10 @@ import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.databinding.ActivityItemBinding
 import cl.accenture.integrador_not_bored.view.activitydetail.ActivityDetail
 
-class ActivityListAdapter: RecyclerView.Adapter<ActivityListAdapter.ActivityViewHolder>() {
+class ActivityListAdapter(splashIntent: Intent): RecyclerView.Adapter<ActivityListAdapter.ActivityViewHolder>() {
 
     private lateinit var activities: List<ActivityItem>
+    private val mainIntent = splashIntent
 
     fun setActivitiesItems(newActivityItem: List<ActivityItem>) {
         this.activities = newActivityItem
@@ -21,7 +22,7 @@ class ActivityListAdapter: RecyclerView.Adapter<ActivityListAdapter.ActivityView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ActivityItemBinding.inflate(layoutInflater,parent, false)
-        return ActivityViewHolder(binding)
+        return ActivityViewHolder(binding, mainIntent)
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
@@ -32,13 +33,14 @@ class ActivityListAdapter: RecyclerView.Adapter<ActivityListAdapter.ActivityView
         return this.activities.size
     }
 
-    class ActivityViewHolder(private val binding: ActivityItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class ActivityViewHolder(private val binding: ActivityItemBinding, listIntent: Intent): RecyclerView.ViewHolder(binding.root) {
+        val itemIntent = listIntent
         fun bind(activity: ActivityItem) {
             this.binding.activityTitle.text = activity.activityName
             this.binding.button.setOnClickListener {
+                var participants = itemIntent.extras.let { it -> it?.getString("participants") }
+                    ?: kotlin.run { "0" }
                 val intent = Intent(it.context, ActivityDetail::class.java).apply {
-                    var participants: String? = "0"
-                    this.extras?.run { participants = getString(R.string.main_activity_lbl_participants.toString()) }
                     putExtra("activityParticipants", participants)
                     putExtra("activityTitle", binding.activityTitle.text)
                 }

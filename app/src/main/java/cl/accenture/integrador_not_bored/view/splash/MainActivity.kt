@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onStartBtnClicked() {
         val intent = Intent(this, ActivityListActivity::class.java).apply {
-            putExtra(R.string.main_activity_lbl_participants.toString(), binding.editMainTxtNumber.text)
+            putExtra("participants", binding.editMainTxtNumber.text)
         }
         startActivity(intent)
     }

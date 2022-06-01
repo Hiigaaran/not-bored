@@ -14,10 +14,21 @@ class ActivityDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val intent = Intent(this, ActivityListActivity::class.java)
         intent.extras?.run {
             binding.participantsCount.text = getString("activityParticipants")
             binding.toolbar2.title = getString("activityTitle")
+        }
+
+        binding.tryAgainBtn.setOnClickListener {
+            onTryAnotherClick()
+        }
+    }
+
+    fun onTryAnotherClick() {
+        val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
+            //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
+            //Se guardan los resultados de la llamada para generar la proxima actividad.
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
         }
     }
 }

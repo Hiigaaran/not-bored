@@ -16,7 +16,7 @@ class ActivityListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val activityListAdapter = ActivityListAdapter()
+        val activityListAdapter = ActivityListAdapter(intent)
         val activityItemRepository = ActivityItemRepository(ActivityItemDatasource())
 
         binding.activityList.layoutManager = LinearLayoutManager(this)
