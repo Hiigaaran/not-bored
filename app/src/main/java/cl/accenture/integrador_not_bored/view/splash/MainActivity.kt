@@ -39,16 +39,22 @@ class MainActivity : AppCompatActivity() {
 
     fun onStartBtnClicked() {
         val intent = Intent(this, ActivityListActivity::class.java).apply {
-            putExtra("participants", binding.editMainTxtNumber.text)
+            putExtra("participants", binding.editMainTxtNumber.text.toString())
         }
         startActivity(intent)
     }
 
     fun onParticipantsNumberChanged() {
         when {
-            !binding.editMainTxtNumber.text.isNullOrBlank() && binding.editMainTxtNumber.text.toString().toInt() <= 0 -> Toast.makeText(this, "Participants must be 1 or above", Toast.LENGTH_SHORT).show()
-            !binding.editMainTxtNumber.text.isNullOrBlank() -> binding.mainBtnStart.isEnabled = true
-            binding.editMainTxtNumber.text.isNullOrBlank() -> binding.mainBtnStart.isEnabled = false
+            !binding.editMainTxtNumber.text.isNullOrBlank() &&
+                    binding.editMainTxtNumber.text.toString().toInt() <= 0 ->
+                Toast.makeText(this, "Participants must be 1 or above", Toast.LENGTH_SHORT).show()
+
+            !binding.editMainTxtNumber.text.isNullOrBlank() ->
+                binding.mainBtnStart.isEnabled = true
+
+            binding.editMainTxtNumber.text.isNullOrBlank() ->
+                binding.mainBtnStart.isEnabled = false
         }
     }
 }
