@@ -19,6 +19,9 @@ class ActivityDetail : AppCompatActivity() {
         setContentView(binding.root)
         /////////nuevo//////////////
         this.setTitle(intent.extras?.getString("activityTitle").toString())
+        binding.detailTitle.text = intent.extras?.getString("activityName")
+        binding.categoryText.text = intent.extras?.getString("activityCategory") ?: ""
+        binding.priceCount.text = intent.extras?.getString("activityPrice")
         /////////nuevo fco//////////////
 
         intent.extras?.run {
@@ -49,7 +52,7 @@ class ActivityDetail : AppCompatActivity() {
     }
 
     /////////nuevo fco//////////////
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
 
 

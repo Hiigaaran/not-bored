@@ -15,11 +15,11 @@ class BoredActivityDataSource {
 
         service.enqueue(object: Callback<BoredActivity> {
             override fun onResponse(call: Call<BoredActivity>, response: Response<BoredActivity>) {
-                val post = response.body()
-                if (response.isSuccessful && post != null) {
+                val activity = response.body()
+                if (response.isSuccessful && activity != null) {
                     listener.onResponse(
                         RepositoryResponse(
-                            data = post
+                            data = activity
                         )
                     )
                 } else {
@@ -50,11 +50,11 @@ class BoredActivityDataSource {
 
         service.enqueue(object: Callback<BoredActivity> {
             override fun onResponse(call: Call<BoredActivity>, response: Response<BoredActivity>) {
-                val post = response.body()
-                if (response.isSuccessful && post != null) {
+                val activity = response.body()
+                if (response.isSuccessful && activity != null) {
                     listener.onResponse(
                         RepositoryResponse(
-                            data = post
+                            data = activity
                         )
                     )
                 } else {

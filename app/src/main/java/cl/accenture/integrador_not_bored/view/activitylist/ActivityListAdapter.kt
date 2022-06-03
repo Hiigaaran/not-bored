@@ -4,8 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.databinding.ActivityItemBinding
 import cl.accenture.integrador_not_bored.view.activitydetail.ActivityDetail
 
