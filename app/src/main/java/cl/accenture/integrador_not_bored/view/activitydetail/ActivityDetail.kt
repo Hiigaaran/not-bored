@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.databinding.ActivityDetailBinding
 import cl.accenture.integrador_not_bored.databinding.ActivityListBinding
 import cl.accenture.integrador_not_bored.view.activitylist.ActivityListActivity
@@ -14,9 +17,14 @@ class ActivityDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        /////////nuevo//////////////
+        this.setTitle(intent.extras?.getString("activityTitle").toString())
+        /////////nuevo fco//////////////
+
         intent.extras?.run {
             binding.participantsCount.text = getString("activityParticipants")
-            binding.toolbar2.title = getString("activityTitle")
+            //comentado fco////
+            //binding.toolbar2.title = getString("activityTitle")
         }
 
         binding.tryAgainBtn.setOnClickListener {
@@ -39,4 +47,28 @@ class ActivityDetail : AppCompatActivity() {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
     }
+
+    /////////nuevo fco//////////////
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId){
+
+            R.id.Back -> {
+
+                onBackPressed()
+            }
+
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    /////////nuevo//////////////
+
 }

@@ -3,6 +3,8 @@ package cl.accenture.integrador_not_bored.view.activitylist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.data.ActivityItemDatasource
@@ -17,6 +19,10 @@ class ActivityListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //codigo agregado fco
+        this.setTitle("Activities")
+        //codigo agregado fco
         val activityListAdapter = ActivityListAdapter(intent)
         val cantidadParticipantes = intent.extras?.getString("participants", "NO")
 
@@ -34,4 +40,26 @@ class ActivityListActivity : AppCompatActivity() {
             putExtra("activityTitle", "Random")
         }
     }
+    /////////nuevo fco//////////////
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId){
+
+            R.id.Back -> {
+
+                onBackPressed()
+            }
+
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    //codigo agregado fco
 }

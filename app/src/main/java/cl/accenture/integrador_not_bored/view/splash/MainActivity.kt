@@ -3,6 +3,7 @@ package cl.accenture.integrador_not_bored.view.splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import cl.accenture.integrador_not_bored.R
@@ -26,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding.mainBtnStart.setOnClickListener {
             onStartBtnClicked()
         }
+        /////////codigo fco///////////////////////////
+        this.setTitle("Not Bored")
+        ////////////////////////////////////
 
         binding.editMainTxtNumber.addTextChangedListener {
             onParticipantsNumberChanged()
@@ -56,5 +60,11 @@ class MainActivity : AppCompatActivity() {
             binding.editMainTxtNumber.text.isNullOrBlank() ->
                 binding.mainBtnStart.isEnabled = false
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_principal,menu)
+
+
+        return super.onCreateOptionsMenu(menu)
     }
 }

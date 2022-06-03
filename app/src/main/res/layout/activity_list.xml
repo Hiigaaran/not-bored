@@ -6,24 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.activitylist.ActivityListActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:background="#2196F3"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/activityList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@android:drawable/ic_menu_revert"
-        app:title="@string/activities_fragment_title"
-        app:titleMarginStart="80dp"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:titleTextColor="#000000" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activityList"
         android:layout_width="409dp"
@@ -32,6 +14,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
