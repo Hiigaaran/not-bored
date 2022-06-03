@@ -6,13 +6,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.databinding.ActivityDetailBinding
 import cl.accenture.integrador_not_bored.databinding.ActivityListBinding
 import cl.accenture.integrador_not_bored.view.activitylist.ActivityListActivity
+import cl.accenture.integrador_not_bored.view.activitylist.ActivityListViewModel
+import cl.accenture.integrador_not_bored.view.activitylist.ViewModelFactory
 
 class ActivityDetail : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
+    private val viewModel: ActivityListViewModel by viewModels(
+        factoryProducer = { ViewModelFactory() }
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -36,12 +42,11 @@ class ActivityDetail : AppCompatActivity() {
     }
 
     fun onTryAnotherClick() {
-        val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
-            //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
-            //Se guardan los resultados de la llamada para generar la proxima actividad.
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+        if (binding.categoryText.text.isNullOrBlank()) {
+            onActivityCall(this.title.toString())
+        } else {
+            onRandomCall(binding.participantsCount.text.toString().toInt())
         }
-        startActivity(intentTryAnother)
     }
 
     fun onBackBtnClick() {
@@ -73,5 +78,39 @@ class ActivityDetail : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     /////////nuevo//////////////
+
+    fun onRandomCall(participants: Int) {
+        viewModel.getRandomActivity(participants)
+        viewModel.activity.observe(this) { value ->
+            val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
+                //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
+                //Se guardan los resultados de la llamada para generar la proxima actividad.
+                putExtra("activityCategory", "")
+                putExtra("activityPrice", value?.price.toString())
+                putExtra("activityName", value?.activity.toString())
+                putExtra("activityParticipants", value?.participants.toString())
+                putExtra("activityTitle", this@ActivityDetail.title.toString())
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+            }
+            startActivity(intentTryAnother)
+        }
+    }
+
+    fun onActivityCall(type: String) {
+        viewModel.getActivityByType(type)
+        viewModel.activity.observe(this) { value ->
+            val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
+                //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
+                //Se guardan los resultados de la llamada para generar la proxima actividad.
+                putExtra("activityCategory", value?.type.toString())
+                putExtra("activityPrice", value?.price.toString())
+                putExtra("activityName", value?.activity.toString())
+                putExtra("activityParticipants", value?.participants.toString())
+                putExtra("activityTitle", "Random")
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+            }
+            startActivity(intentTryAnother)
+        }
+    }
 
 }
