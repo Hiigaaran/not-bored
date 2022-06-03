@@ -28,7 +28,7 @@ class ActivityListActivity : AppCompatActivity() {
         //codigo agregado fco
         this.setTitle("Activities")
         //codigo agregado fco
-        val activityListAdapter = ActivityListAdapter(intent)
+        val activityListAdapter = ActivityListAdapter(intent, viewModel)
         val cantidadParticipantes = intent.extras?.getString("participants", "NO")
 
         val activityItemRepository = ActivityItemRepository(ActivityItemDatasource())
