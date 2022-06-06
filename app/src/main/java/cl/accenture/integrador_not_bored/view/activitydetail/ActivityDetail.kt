@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import cl.accenture.integrador_not_bored.R
 import cl.accenture.integrador_not_bored.data.util.PriceUtility
 import cl.accenture.integrador_not_bored.databinding.ActivityDetailBinding
@@ -29,6 +30,8 @@ class ActivityDetail : AppCompatActivity() {
         this.setTitle(intent.extras?.getString("activityTitle").toString())
         binding.detailTitle.text = intent.extras?.getString("activityName")
         binding.categoryText.text = intent.extras?.getString("activityCategory") ?: ""
+        if(binding.categoryText.text.toString().equals(""))
+            binding.categoryText.isVisible = false
         binding.priceCount.text = PriceUtility().priceEvaluation(intent.extras?.getString("activityPrice").toString().toDouble())
         /////////nuevo fco//////////////
 
