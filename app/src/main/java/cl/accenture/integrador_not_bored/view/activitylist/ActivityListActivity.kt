@@ -91,6 +91,7 @@ class ActivityListActivity : AppCompatActivity() {
     /////////nuevo fco//////////////
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
+        menu.getItem(0).setIcon(R.drawable.ic_random)
         return super.onCreateOptionsMenu(menu)
     }
 
