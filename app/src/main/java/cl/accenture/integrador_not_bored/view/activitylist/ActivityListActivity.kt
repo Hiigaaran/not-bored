@@ -1,6 +1,7 @@
 package cl.accenture.integrador_not_bored.view.activitylist
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -24,7 +25,6 @@ class ActivityListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         //codigo agregado fco
         this.setTitle("Activities")
