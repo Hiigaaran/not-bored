@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import cl.accenture.integrador_not_bored.R
+import cl.accenture.integrador_not_bored.data.util.PriceUtility
 import cl.accenture.integrador_not_bored.databinding.ActivityDetailBinding
 import cl.accenture.integrador_not_bored.databinding.ActivityListBinding
 import cl.accenture.integrador_not_bored.view.activitylist.ActivityListActivity
@@ -28,7 +29,7 @@ class ActivityDetail : AppCompatActivity() {
         this.setTitle(intent.extras?.getString("activityTitle").toString())
         binding.detailTitle.text = intent.extras?.getString("activityName")
         binding.categoryText.text = intent.extras?.getString("activityCategory") ?: ""
-        binding.priceCount.text = intent.extras?.getString("activityPrice")
+        binding.priceCount.text = PriceUtility().priceEvaluation(intent.extras?.getString("activityPrice").toString().toDouble())
         /////////nuevo fco//////////////
 
         intent.extras?.run {
@@ -43,7 +44,7 @@ class ActivityDetail : AppCompatActivity() {
     }
 
     fun onTryAnotherClick() {
-        if (binding.categoryText.text.isNullOrBlank()) {
+        if (binding.categoryText.text.toString().equals("")) {
             onActivityCall(this.title.toString())
         } else {
             onRandomCall(binding.participantsCount.text.toString().toInt())
@@ -83,34 +84,38 @@ class ActivityDetail : AppCompatActivity() {
     fun onRandomCall(participants: Int) {
         viewModel.getRandomActivity(participants)
         viewModel.activity.observe(this) { value ->
-            val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
-                //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
-                //Se guardan los resultados de la llamada para generar la proxima actividad.
-                putExtra("activityCategory", "")
-                putExtra("activityPrice", value?.price.toString())
-                putExtra("activityName", value?.activity.toString())
-                putExtra("activityParticipants", value?.participants.toString())
-                putExtra("activityTitle", this@ActivityDetail.title.toString())
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+            if(null != value) {
+                val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
+                    //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
+                    //Se guardan los resultados de la llamada para generar la proxima actividad.
+                    putExtra("activityCategory", value.type.toString())
+                    putExtra("activityPrice", value.price.toString())
+                    putExtra("activityName", value.activity.toString())
+                    putExtra("activityParticipants", value.participants.toString())
+                    putExtra("activityTitle", "Random")
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+                }
+                startActivity(intentTryAnother)
             }
-            startActivity(intentTryAnother)
         }
     }
 
     fun onActivityCall(type: String) {
         viewModel.getActivityByType(type.lowercase())
         viewModel.activity.observe(this) { value ->
-            val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
-                //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
-                //Se guardan los resultados de la llamada para generar la proxima actividad.
-                putExtra("activityCategory", value?.type.toString())
-                putExtra("activityPrice", value?.price.toString())
-                putExtra("activityName", value?.activity.toString())
-                putExtra("activityParticipants", value?.participants.toString())
-                putExtra("activityTitle", "Random")
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+            if(null != value) {
+                val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
+                    //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
+                    //Se guardan los resultados de la llamada para generar la proxima actividad.
+                    putExtra("activityCategory", "")
+                    putExtra("activityPrice", value.price.toString())
+                    putExtra("activityName", value.activity.toString())
+                    putExtra("activityParticipants", value.participants.toString())
+                    putExtra("activityTitle", value.type.toString())
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP//Deshabilitar flag si se quiere guardar el stack de ActivityDetail generados.
+                }
+                startActivity(intentTryAnother)
             }
-            startActivity(intentTryAnother)
         }
     }
 
