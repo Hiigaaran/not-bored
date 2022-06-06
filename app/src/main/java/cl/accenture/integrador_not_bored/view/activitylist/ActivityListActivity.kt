@@ -25,10 +25,16 @@ class ActivityListActivity : AppCompatActivity() {
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //codigo agregado fco
         this.setTitle("Activities")
         //codigo agregado fco
-        val activityListAdapter = ActivityListAdapter(intent, viewModel)
+        val activityListAdapter = ActivityListAdapter(object: ActivityListAdapter.ActivityListener {
+            override fun select(activityName: String) {
+                onActivityTypeCall(activityName)
+            }
+
+        } )
         val cantidadParticipantes = intent.extras?.getString("participants", "NO")
 
         val activityItemRepository = ActivityItemRepository(ActivityItemDatasource())
@@ -37,6 +43,23 @@ class ActivityListActivity : AppCompatActivity() {
         binding.activityList.adapter = activityListAdapter
         activityListAdapter.setActivitiesItems(activityItemRepository.getActivities())
 
+    }
+
+    fun onActivityTypeCall(categoryName: String) {
+        viewModel.getActivityByType(categoryName)
+        viewModel.activity.observe(this) {
+            value ->
+            if (null != value) {
+                val intent = Intent(this, ActivityDetail::class.java).apply {
+                    putExtra("activityCategory", "")
+                    putExtra("activityPrice", value.price.toString())
+                    putExtra("activityName", value.activity)
+                    putExtra("activityParticipants", value.participants.toString())
+                    putExtra("activityTitle", value.type)
+                }
+                startActivity(intent)
+            }
+        }
     }
 
     fun onRandomCallClick() {

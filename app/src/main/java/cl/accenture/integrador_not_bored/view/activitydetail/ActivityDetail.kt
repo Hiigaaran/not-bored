@@ -20,6 +20,7 @@ class ActivityDetail : AppCompatActivity() {
         factoryProducer = { ViewModelFactory() }
     )
     override fun onCreate(savedInstanceState: Bundle?) {
+        this.setTitle("Loading")
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -97,7 +98,7 @@ class ActivityDetail : AppCompatActivity() {
     }
 
     fun onActivityCall(type: String) {
-        viewModel.getActivityByType(type)
+        viewModel.getActivityByType(type.lowercase())
         viewModel.activity.observe(this) { value ->
             val intentTryAnother = Intent(this, ActivityDetail::class.java).apply {
                 //Logica de llamada a API para realizar llamada usando el parámetro de entrada participantes.
