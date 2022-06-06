@@ -35,7 +35,11 @@ class ActivityDetail : AppCompatActivity() {
         intent.extras?.run {
             binding.participantsCount.text = getString("activityParticipants")
             //comentado fco////
-            //binding.toolbar2.title = getString("activityTitle")
+        }
+
+        if(binding.participantsCount.text.toString().toInt() == 0) {
+            binding.detailTitle.text = "Invalid amount of participants, return to home and set a lower amount of participants"
+            binding.tryAgainBtn.isEnabled = false
         }
 
         binding.tryAgainBtn.setOnClickListener {
