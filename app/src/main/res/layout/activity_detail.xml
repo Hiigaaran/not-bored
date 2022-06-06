@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="TituloDetalle"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
