@@ -27,7 +27,7 @@ class ActivityDetail : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         /////////nuevo//////////////
-        this.setTitle(intent.extras?.getString("activityTitle").toString())
+        this.setTitle(intent.extras?.getString("activityTitle").toString().replaceFirstChar { char -> char.uppercase() })
         binding.detailTitle.text = intent.extras?.getString("activityName")
         binding.categoryText.text = intent.extras?.getString("activityCategory") ?: ""
         if(binding.categoryText.text.toString().equals(""))
