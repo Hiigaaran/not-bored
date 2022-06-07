@@ -63,6 +63,7 @@ class ActivityDetail : AppCompatActivity() {
             putExtra("participants", intent.extras?.getString("activityParticipants") ?: "0")
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
+        startActivity(intentReturn)
     }
 
     /////////nuevo fco//////////////
@@ -79,7 +80,8 @@ class ActivityDetail : AppCompatActivity() {
 
             R.id.Back -> {
 
-                onBackPressed()
+                //onBackPressed()
+                onBackBtnClick()
             }
 
 
