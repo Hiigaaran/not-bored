@@ -1,6 +1,7 @@
 package cl.accenture.integrador_not_bored.view.activitydetail
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +27,7 @@ class ActivityDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //this.supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.black)))
         /////////nuevo//////////////
         this.setTitle(intent.extras?.getString("activityTitle").toString().replaceFirstChar { char -> char.uppercase() })
         binding.detailTitle.text = intent.extras?.getString("activityName")
