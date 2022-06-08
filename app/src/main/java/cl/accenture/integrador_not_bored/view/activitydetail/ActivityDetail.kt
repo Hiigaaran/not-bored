@@ -31,7 +31,7 @@ class ActivityDetail : AppCompatActivity() {
         /////////nuevo//////////////
         this.setTitle(intent.extras?.getString("activityTitle").toString().replaceFirstChar { char -> char.uppercase() })
         binding.detailTitle.text = intent.extras?.getString("activityName")
-        binding.categoryText.text = intent.extras?.getString("activityCategory") ?: ""
+        binding.categoryText.text = intent.extras?.getString("activityCategory").toString().replaceFirstChar { char -> char.uppercase() } ?: ""
         if(binding.categoryText.text.toString().equals(""))
             binding.categoryText.isVisible = false
         binding.priceCount.text = PriceUtility().priceEvaluation(intent.extras?.getString("activityPrice").toString().toDouble())
@@ -44,6 +44,10 @@ class ActivityDetail : AppCompatActivity() {
 
         if(binding.participantsCount.text.toString().toInt() == 0) {
             binding.detailTitle.text = "Invalid amount of participants, return to home and set a lower amount of participants"
+            binding.priceCount.isVisible = false
+            binding.participantsText.isVisible = false
+            binding.participantsCount.isVisible = false
+            binding.textView7.isVisible = false
             binding.tryAgainBtn.isEnabled = false
         }
 
